@@ -8,7 +8,7 @@ beforeEach(() => {
 
 test('place ship', () => {
   gameboard.addShip(4, 3, 3, 'horizontal');
-  expect(gameboard.getBoard()).toEqual([[3,3], [3,4], [3,5], [3,6]])
+  expect(gameboard.getBoard()).toEqual([{ship: [[3,3], [3,4], [3,5], [3,6]]}])
 });
 
 test('doesnt place invalid horizontal ship', () => {

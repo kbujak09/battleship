@@ -1,10 +1,14 @@
-import Ship from './Ship.js'
+import Ship from './Ship';
 
 const Gameboard = () => {
 
   const board = [];
 
   const getBoard = () => board;
+
+  const missed = [];
+
+  const getMissed = () => missed;
   
   const addShip = (length, x, y, position) => {
     if (position == 'vertical' && y+1 < length || position == 'horizontal' && x + length > 9) {
@@ -22,17 +26,19 @@ const Gameboard = () => {
           squares.push([y, x+i]);
         }
       }
-      squares.forEach(sqr => {
-        board.push(sqr);
-      });
+      board.push({ ship: squares });
     }
     return;
   }
 
+  const receiveAttack = (square) => {
+    
+  }
 
   return {
     getBoard,
-    addShip
+    addShip,
+    getMissed,
   }
 }
 
