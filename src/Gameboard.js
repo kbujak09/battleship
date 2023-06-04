@@ -67,6 +67,7 @@ const Gameboard = () => {
   }
 
   return {
+    board,
     getBoard,
     addShip,
     getMissed,
