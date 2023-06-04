@@ -1,7 +1,5 @@
 import Player from "./Player";
-
-const player = Player();
-const computer = Player();
+import { createBoard } from "./Dom"; 
 
 const populateBoard = (board) => {
   const random = (number) => {
@@ -25,8 +23,20 @@ const populateBoard = (board) => {
   }
 }
 
+const player = Player();
+const computer = Player();
+
 populateBoard(computer.board);
 populateBoard(player.board);
+
+createBoard(playerBoard);
+createBoard(computerBoard);
+
+// while (!computer.board.isOver() && !player.board.isOver()) {
+//   if (player.attack(computer, square)) {
+//     computer.attack(player, player.getRandomSquare());
+//   }
+// }
 
 
  
