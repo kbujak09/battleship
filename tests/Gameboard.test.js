@@ -38,4 +38,17 @@ test('ship receives attack', () => {
 test('gameboard collects missed shot', () => {
   gameboard.receiveAttack([3,4]);
   expect(gameboard.getMissed().toString()).toEqual([3,4].toString());
-})
+});
+
+test('gameboard checks if all ships are not sunk', () => {
+  gameboard.addShip(2, 3, 3, 'horizontal');
+  gameboard.receiveAttack([3,4]);
+  expect(gameboard.isOver()).toBe(false);
+});
+
+test('gameboard checks if all ships are sunk', () => {
+  gameboard.addShip(2, 3, 3, 'horizontal');
+  gameboard.receiveAttack([3,3]);
+  gameboard.receiveAttack([3,4]);
+  expect(gameboard.isOver()).toBe(true);
+});

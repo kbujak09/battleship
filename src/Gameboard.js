@@ -57,11 +57,22 @@ const Gameboard = () => {
     missed.push(square);
   }
 
+  const isOver = () => {
+    for (let ship of getBoard()) {
+      if (!ship.deck.isSunk()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return {
     getBoard,
     addShip,
     getMissed,
-    receiveAttack
+    receiveAttack,
+    getOccupied,
+    isOver,
   }
 }
 
