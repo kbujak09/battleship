@@ -1,6 +1,8 @@
 import Gameboard from '../src/Gameboard';
+import Ship from '../src/Ship';
 
 let gameboard;
+let ship;
 
 beforeEach(() => {
   gameboard = Gameboard();
@@ -8,11 +10,11 @@ beforeEach(() => {
 
 test('place ship', () => {
   gameboard.addShip(4, 3, 3, 'horizontal');
-  expect(gameboard.getBoard()).toEqual([{ship: [[3,3], [3,4], [3,5], [3,6]]}])
+  expect(gameboard.getBoard().toString()).toEqual([{ship: Ship(4), position: [[3,3], [3,4], [3,5], [3,6]]}].toString())
 });
 
 test('doesnt place invalid horizontal ship', () => {
-  gameboard.addShip(4, 7, 2, 'horizontal');
+  gameboard.addShip(4, 2, 7, 'horizontal');
   expect(gameboard.getBoard()).toEqual([]);
 });
 
@@ -20,3 +22,20 @@ test('doesnt place invalid vertical ship', () => {
   gameboard.addShip(4, 2, 2, 'vertical');
   expect(gameboard.getBoard()).toEqual([]);
 });
+
+test('doesnt place overlapping ships', () => {
+  gameboard.addShip(4, 3, 3, 'horizontal');
+  gameboard.addShip(4, 4, 4, 'vertical');
+  expect(gameboard.getBoard().toString()).toEqual([{ship: Ship(4), position: [[3,3], [3,4], [3,5], [3,6]]}].toString())
+});
+
+test('ship receives attack', () => {
+  ship = gameboard.addShip(4,3,3, 'horizontal');
+  gameboard.receiveAttack([3,4]);
+  expect(ship.deck.hitCount()).toBe(1);
+});
+
+test('gameboard collects missed shot', () => {
+  gameboard.receiveAttack([3,4]);
+  expect(gameboard.getMissed().toString()).toEqual([3,4].toString());
+})

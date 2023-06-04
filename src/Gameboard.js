@@ -2,6 +2,10 @@ import Ship from './Ship';
 
 const Gameboard = () => {
 
+  const occupied = [];
+
+  const getOccupied = () => occupied;
+
   const board = [];
 
   const getBoard = () => board;
@@ -10,7 +14,7 @@ const Gameboard = () => {
 
   const getMissed = () => missed;
   
-  const addShip = (length, x, y, position) => {
+  const addShip = (length, y, x, position) => {
     if (position == 'vertical' && y+1 < length || position == 'horizontal' && x + length > 9) {
       return;
     }
@@ -26,19 +30,38 @@ const Gameboard = () => {
           squares.push([y, x+i]);
         }
       }
-      board.push({ ship: squares });
+      for (let sqr of squares) {
+        if (getOccupied().toString().includes(sqr.toString())) {
+          return;
+        }
+        else {
+          const ship = { deck: Ship(length), position: squares }
+          board.push(ship);
+          for (let pos of ship.position) {
+            occupied.push([pos[0]+1, pos[1]-1], [pos[0]+1, pos[1]], [pos[0]+1, pos[1]+1], 
+                          [pos[0], pos[1]-1], [pos[0], pos[1]], [pos[0], pos[1]+1],
+                          [pos[0]-1, pos[1]-1], [pos[0]-1, pos[1]], [pos[0]-1, pos[1]+1])
+          }  
+          return ship;
+        }
+      }
     }
-    return;
   }
 
   const receiveAttack = (square) => {
-    
+    for (let ship of getBoard()) {
+      if (ship.position.toString().includes(square.toString())) {
+        return ship.deck.hit();
+      }
+    }
+    missed.push(square);
   }
 
   return {
     getBoard,
     addShip,
     getMissed,
+    receiveAttack
   }
 }
 
