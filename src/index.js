@@ -12,9 +12,13 @@ createBoard(computerBoard);
 
 renderShips(player.board.getShips(), computer.board.getShips());
 
-player.attack(computer, computer.getRandomSquare())
-computer.attack(player, player.getRandomSquare())
+const computerSquares = document.querySelectorAll('.computerSqr')
 
-reRender(player.board.getMissed(), player.board.getHits(), computer.board.getMissed(), computer.board.getHits())
-
-
+computerSquares.forEach(sqr => {
+  sqr.addEventListener('click', (e) => {
+    player.attack(computer, [e.target.dataset.computer[0], e.target.dataset.computer[2]]);
+    let computerHit = player.getRandomSquare();
+    computer.attack(player, computerHit);
+    reRender([e.target.dataset.computer[0], e.target.dataset.computer[2]], computerHit)
+  })
+})

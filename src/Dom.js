@@ -68,35 +68,31 @@ const populateBoard = (board) => {
   }
 }
 
-const reRender = (playerMissed, playerHits, computerMissed, computerHits) => {
+const reRender = (playerHit, computerHit) => {
+
   const playerSquares = document.querySelectorAll('.playerSqr');
   const computerSquares = document.querySelectorAll('.computerSqr');
 
   playerSquares.forEach(sqr => {
-    playerMissed.forEach(miss => {
-      if (miss == sqr.dataset.player) {
-        sqr.classList.add('missComputer');
-      }
-    })
-    playerHits.forEach(hit => {
-      if (hit == sqr.dataset.player) {
-        sqr.classList.add('hitComputer');
-      }
-    })
-  })
-  computerSquares.forEach(sqr => {
-    computerMissed.forEach(miss => {
-      if (miss == sqr.dataset.computer) {
-        sqr.classList.add('miss');
-      }
-    })
-    computerHits.forEach(hit => {
-      if (hit == sqr.dataset.computer) {
+    if (sqr.dataset.player == computerHit) {
+      if (sqr.classList.contains('playerShip')) {
         sqr.classList.add('hit');
       }
-    })
+      else {
+        sqr.classList.add('miss');
+      }
+    }
+  })
+  computerSquares.forEach(sqr => {
+    if (sqr.dataset.computer == playerHit) {
+      if (sqr.classList.contains('computerShip')) {
+        sqr.classList.add('hit');
+      }
+      else {
+        sqr.classList.add('miss');
+      }
+    }
   })
 }
-
 
 export { createBoard, renderShips, takeInput, populateBoard, reRender };
