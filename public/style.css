@@ -40,6 +40,31 @@ body, html {
   cursor: pointer;
 }
 .computerSqr:hover {
-  background-color: rgb(220, 220, 220);
   transform: scale(1.07);
+  background-color: rgb(220, 220, 220);
+}
+.playerShip {
+  background-color: red;
+}
+.hit {
+  background-color: orange;
+}
+.hit:hover {
+  transform: scale(1);
+  background-color: orange;
+  cursor: default;
+}
+.miss {
+  background-color: aqua;
+}
+.miss:hover {
+  background-color: aqua;
+  transform: scale(1);
+  cursor: default;
+}
+.missComputer {
+  background-color: aqua;
+}
+.hitComputer {
+  background-color: orange;
 }

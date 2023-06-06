@@ -25,7 +25,8 @@ test('doesnt place invalid vertical ship', () => {
 
 test('doesnt place overlapping ships', () => {
   gameboard.addShip(4, 3, 3, 'horizontal');
-  gameboard.addShip(4, 4, 4, 'vertical');
+  gameboard.addShip(4, 6, 4, 'vertical');
+  console.log(gameboard.getShips())
   expect(gameboard.getBoard().toString()).toEqual([{ship: Ship(4), position: [[3,3], [3,4], [3,5], [3,6]]}].toString())
 });
 

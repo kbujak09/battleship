@@ -13,13 +13,27 @@ const Gameboard = () => {
   const missed = [];
 
   const getMissed = () => missed;
+
+  const hits = [];
+
+  const getHits = () => hits;
+
+  const getShips = () => {
+    const ships = [];
+    getBoard().forEach(ship => {
+      ship.position.forEach(sqr => {
+        ships.push(sqr);
+      })
+    })
+    return ships;
+  }
   
   const addShip = (length, y, x, position) => {
     if (position == 'vertical' && y+1 < length || position == 'horizontal' && x + length > 9) {
       return;
     }
     else {
-      const squares = [];
+      let squares = [];
       if (position == 'vertical') {
         for (let i = 0; i < length; i++) {
           squares.push([y-i, x]);
@@ -31,10 +45,12 @@ const Gameboard = () => {
         }
       }
       for (let sqr of squares) {
-        if (getOccupied().toString().includes(sqr.toString())) {
-          return;
+          for (let occ of getOccupied()) {
+            if (occ.toString() == sqr.toString()) {
+              return;
+            }
+          }
         }
-        else {
           const ship = { deck: Ship(length), position: squares }
           board.push(ship);
           for (let pos of ship.position) {
@@ -43,14 +59,13 @@ const Gameboard = () => {
                           [pos[0]-1, pos[1]-1], [pos[0]-1, pos[1]], [pos[0]-1, pos[1]+1])
           }  
           return ship;
-        }
       }
     }
-  }
 
   const receiveAttack = (square) => {
     for (let ship of getBoard()) {
       if (ship.position.toString().includes(square.toString())) {
+        hits.push(square);
         return ship.deck.hit();
       }
     }
@@ -69,11 +84,13 @@ const Gameboard = () => {
   return {
     board,
     getBoard,
+    getShips,
     addShip,
     getMissed,
     receiveAttack,
     getOccupied,
     isOver,
+    getHits,
   }
 }
 
