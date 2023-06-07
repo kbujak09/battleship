@@ -1,6 +1,9 @@
+const text = document.querySelector('#result');
+
 const createBoard = (board) => {
   const computerBoard = document.querySelector('#computerBoard');
   const playerBoard = document.querySelector('#playerBoard');
+
   for (let i = 9; i >= 0; i--) {
     for (let j = 0; j < 10; j++) {
       const sqr = document.createElement('div');
@@ -89,9 +92,12 @@ const reRender = (playerHit, computerHit) => {
 
 const handleClick = (player, enemy, e) => {
   player.attack(enemy, [e.target.dataset.computer[0], e.target.dataset.computer[2]]);
+  reRender([e.target.dataset.computer[0], e.target.dataset.computer[2]], undefined)
   let computerHit = player.getRandomSquare();
   enemy.attack(player, computerHit);
-  reRender([e.target.dataset.computer[0], e.target.dataset.computer[2]], computerHit)
+  setInterval(() => {
+    reRender([e.target.dataset.computer[0], e.target.dataset.computer[2]], computerHit)
+  }, 200);
 }
 
 const playGame = (player, enemy) => {
@@ -101,14 +107,22 @@ const playGame = (player, enemy) => {
       handleClick(player, enemy, event);
       setTimeout(() => {
         if (player.board.isOver()) {
-          alert('computer won');
+          text.innerText = 'computer won!'
         }
         else if (enemy.board.isOver()) {
-          alert('player won');
+          text.innerText = 'player won!'
         }
       }, 10);
-    })
+    }, { once: true })
   })
+    setTimeout(() => {
+      if (player.board.isOver()) {
+        text.innerText = 'computer won!'
+      }
+      else if (enemy.board.isOver()) {
+        text.innerText = 'player won!'
+      }
+    }, 10);
 }
 
 export { createBoard, renderShips, populateBoard, playGame };

@@ -20,6 +20,11 @@ body, html {
   padding: 4vh 200px;
   gap: 40px;
 }
+#result {
+  height: 12vh;
+  text-align: center;
+  font-size: 28px;
+}
 #footer {
   height: 8vh;
   display: flex;
