@@ -8,13 +8,14 @@ const Player = () => {
     enemy.board.receiveAttack(square);
   }
 
-  const getRandomSquare = () => {
-    const moves = [];
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 10; j++) {
-        moves.push([i, j]);
-      }
+  const moves = [];
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      moves.push([i, j]);
     }
+  }
+
+  const getRandomSquare = () => {
     return moves.splice(Math.floor(Math.random() * moves.length), 1);
   }
 

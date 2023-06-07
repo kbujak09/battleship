@@ -37,14 +37,6 @@ const renderShips = (playerShips, computerShips) => {
   })
 }
 
-const takeInput = () => {
-  const computerSquares = document.querySelectorAll('.computerSqr');
-  computerSquares.forEach(sqr => {
-    sqr.addEventListener('click', (e) => {
-      return [e.target.dataset.computer[0], e.target.dataset.computer[2]];
-    })
-  })
-}
 
 const populateBoard = (board) => {
   const random = (number) => {
@@ -95,4 +87,28 @@ const reRender = (playerHit, computerHit) => {
   })
 }
 
-export { createBoard, renderShips, takeInput, populateBoard, reRender };
+const handleClick = (player, enemy, e) => {
+  player.attack(enemy, [e.target.dataset.computer[0], e.target.dataset.computer[2]]);
+  let computerHit = player.getRandomSquare();
+  enemy.attack(player, computerHit);
+  reRender([e.target.dataset.computer[0], e.target.dataset.computer[2]], computerHit)
+}
+
+const playGame = (player, enemy) => {
+  const computerSquares = document.querySelectorAll('.computerSqr')
+  computerSquares.forEach(sqr => {
+    sqr.addEventListener('click', () => {
+      handleClick(player, enemy, event);
+      setTimeout(() => {
+        if (player.board.isOver()) {
+          alert('computer won');
+        }
+        else if (enemy.board.isOver()) {
+          alert('player won');
+        }
+      }, 10);
+    })
+  })
+}
+
+export { createBoard, renderShips, populateBoard, playGame };

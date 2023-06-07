@@ -64,10 +64,13 @@ const Gameboard = () => {
 
   const receiveAttack = (square) => {
     for (let ship of getBoard()) {
-      if (ship.position.toString().includes(square.toString())) {
-        hits.push(square);
-        return ship.deck.hit();
-      }
+      ship.position.forEach(pos => {
+        if (pos.toString() == square) {
+          hits.push(square);
+          return ship.deck.hit();
+        }
+      })
+      
     }
     missed.push(square);
   }

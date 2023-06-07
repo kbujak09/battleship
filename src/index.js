@@ -1,5 +1,5 @@
 import Player from "./Player";
-import { createBoard, renderShips, takeInput, populateBoard, reRender } from "./Dom";
+import { createBoard, renderShips, populateBoard, playGame } from "./Dom";
 
 const player = Player();
 const computer = Player();
@@ -11,14 +11,9 @@ createBoard(playerBoard);
 createBoard(computerBoard);
 
 renderShips(player.board.getShips(), computer.board.getShips());
+ 
+playGame(player, computer);
 
-const computerSquares = document.querySelectorAll('.computerSqr')
+console.log(player.board.getShips())
 
-computerSquares.forEach(sqr => {
-  sqr.addEventListener('click', (e) => {
-    player.attack(computer, [e.target.dataset.computer[0], e.target.dataset.computer[2]]);
-    let computerHit = player.getRandomSquare();
-    computer.attack(player, computerHit);
-    reRender([e.target.dataset.computer[0], e.target.dataset.computer[2]], computerHit)
-  })
-})
+
