@@ -108,9 +108,15 @@ const playGame = (player, enemy) => {
       setTimeout(() => {
         if (player.board.isOver()) {
           text.innerText = 'computer won!'
+          document.addEventListener('click', () => {
+            window.location.reload()
+          })
         }
         else if (enemy.board.isOver()) {
           text.innerText = 'player won!'
+          document.addEventListener('click', () => {
+            window.location.reload()
+          })
         }
       }, 10);
     }, { once: true })
@@ -124,5 +130,6 @@ const playGame = (player, enemy) => {
       }
     }, 10);
 }
+
 
 export { createBoard, renderShips, populateBoard, playGame };

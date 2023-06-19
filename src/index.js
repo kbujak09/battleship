@@ -14,6 +14,5 @@ renderShips(player.board.getShips(), computer.board.getShips());
  
 playGame(player, computer);
 
-console.log(player.board.getShips())
 
 
