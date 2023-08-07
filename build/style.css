@@ -30,6 +30,10 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+}
+.github {
+  width: 48px;
 }
 .board {
   width: 70vh;
