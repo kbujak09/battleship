@@ -1,0 +1,79 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+#header {
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+#content {
+  height: 72vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 200px;
+  gap: 40px;
+}
+#result {
+  height: 12vh;
+  text-align: center;
+  font-size: 28px;
+}
+#footer {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.github {
+  width: 48px;
+}
+.board {
+  width: 70vh;
+  height: 70vh;
+  background-color: whitesmoke;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+.sqr {
+  border: 1px solid black;
+}
+.computerSqr {
+  cursor: pointer;
+}
+.computerSqr:hover {
+  transform: scale(1.07);
+  background-color: rgb(220, 220, 220);
+}
+.playerShip {
+  background-color: red;
+}
+.hit {
+  background-color: orange;
+}
+.hit:hover {
+  transform: scale(1);
+  background-color: orange;
+  cursor: default;
+}
+.miss {
+  background-color: aqua;
+}
+.miss:hover {
+  background-color: aqua;
+  transform: scale(1);
+  cursor: default;
+}
+.missComputer {
+  background-color: aqua;
+}
+.hitComputer {
+  background-color: orange;
+}
